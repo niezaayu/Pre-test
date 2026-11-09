@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOEFL ITP Listening Test - Script & Accommodated Version</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased min-h-screen flex flex-col">
+
+  <!-- ACCESSIBILITY TOP BANNER -->
+  <header class="bg-slate-900 border-b border-slate-800 text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <span class="bg-indigo-600 font-extrabold text-xs px-2.5 py-1 rounded tracking-wider uppercase">TOEFL ITP®</span>
+        <div>
+          <h1 class="text-sm sm:text-base font-bold flex items-center gap-2">
+            Section 1: Listening Comprehension
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 border border-emerald-700/50">
+              Script-Only Accommodated
+            </span>
+          </h1>
+          <p class="text-xs text-slate-400">Accommodated format for deaf & hard-of-hearing students</p>
+        </div>
+      </div>
+
+      <!-- TIMER & ACTION -->
+      <div class="flex items-center gap-3 ml-auto">
+        <div id="timerContainer" class="flex items-center gap-2 bg-slate-800 border border-slate-700 px-3 py-1.5 rounded-lg text-sm font-mono-code font-bold text-amber-300">
+          <svg class="w-4 h-4 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <span id="timerDisplay">35:00</span>
+        </div>
+        <button id="finishBtn" onclick="submitTest()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm px-4 py-2 rounded-lg transition shadow-sm">
+          Submit Test
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN TESTING VIEW -->
+  <main id="testContainer" class="max-w-7xl mx-auto w-full px-4 sm:px-6 py-6 flex-1 flex flex-col gap-6">
+
+    <!-- DIRECTIONS BANNER -->
+    <div class="bg-white rounded-xl border border-slate-200 p-4 shadow-sm text-xs sm:text-sm text-slate-700 flex flex-col gap-1.5">
+      <div class="flex items-center justify-between">
+        <span class="font-bold text-indigo-700 uppercase tracking-wider text-xs">Section Directions</span>
+        <span class="text-slate-400 font-medium">Items 1 – 25</span>
+      </div>
+      <p class="leading-relaxed">
+        This accommodated test presents the verbatim spoken conversations and questions in text format. Read each dialogue or talk carefully, then select the best answer from the four options provided.
+      </p>
+    </div>
+
+    <!-- MAIN TWO-COLUMN WORKSPACE -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 flex-1 items-start">
+
+      <!-- LEFT: SCRIPT STIMULUS (7 Cols) -->
+      <section class="lg:col-span-7 bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col gap-4 min-h-[460px]">
+        <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+          <div class="flex items-center gap-2">
+            <span id="partBadge" class="bg-indigo-50 text-indigo-700 border border-indigo-200 text-xs font-bold px-2.5 py-1 rounded-md">
+              Part A
+            </span>
+            <span id="questionCategory" class="text-xs text-slate-500 font-medium">Short Dialogue</span>
+          </div>
+          <span class="text-xs font-mono-code text-slate-400">Accommodated Transcript</span>
+        </div>
+
+        <!-- SCRIPT CONTENT CONTAINER -->
+        <div id="scriptContainer" class="flex-1 flex flex-col gap-3 py-2">
+          <!-- Dynamically inserted -->
+        </div>
+
+        <div class="pt-3 border-t border-slate-100 text-xs text-slate-400 flex items-center justify-between">
+          <span>Official TOEFL ITP Spoken Transcript</span>
+          <span>Zero Audio Dependencies Required</span>
+        </div>
+      </section>
+
+      <!-- RIGHT: QUESTION, OPTIONS & PALETTE (5 Cols) -->
+      <section class="lg:col-span-5 flex flex-col gap-5">
+
+        <!-- QUESTION & OPTIONS CARD -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-5 sm:p-6 flex flex-col">
+          <div class="flex items-center justify-between pb-3 mb-4 border-b border-slate-100">
+            <span class="font-bold text-xs uppercase tracking-wider text-slate-500" id="qNumberBadge">Question 1 of 25</span>
+            <button id="flagBtn" onclick="toggleFlag()" class="text-xs font-semibold px-2.5 py-1 rounded-md border border-slate-200 text-slate-500 hover:text-amber-600 hover:border-amber-300 flex items-center gap-1.5 transition">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+              </svg>
+              <span id="flagText">Flag for Review</span>
+            </button>
+          </div>
+
+          <!-- QUESTION TEXT -->
+          <h2 id="questionPrompt" class="text-base font-bold text-slate-900 mb-4 leading-snug">
+            <!-- Question text -->
+          </h2>
+
+          <!-- ANSWER OPTIONS -->
+          <div id="optionsList" class="space-y-2.5">
+            <!-- Injected options -->
+          </div>
+
+          <!-- NAVIGATION CONTROLS -->
+          <div class="flex items-center justify-between mt-6 pt-4 border-t border-slate-100">
+            <button id="prevBtn" onclick="goToPreviousQuestion()" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-100 hover:bg-slate-200 text-slate-700 transition">
+              Previous
+            </button>
+            <button id="nextBtn" onclick="goToNextQuestion()" class="px-5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-indigo-600 hover:bg-indigo-500 text-white transition shadow-sm">
+              Next Question
+            </button>
+          </div>
+        </div>
+
+        <!-- 25-ITEM PALETTE -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-4 sm:p-5">
+          <div class="flex items-center justify-between mb-3 text-xs">
+            <span class="font-bold uppercase tracking-wider text-slate-500">Question Palette</span>
+            <span id="progressSummary" class="text-slate-500 font-medium">0/25 Answered</span>
+          </div>
+
+          <div id="paletteGrid" class="grid grid-cols-5 gap-2">
+            <!-- 25 palette numbers generated by JS -->
+          </div>
+
+          <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-500">
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-indigo-600 inline-block"></span> Answered</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-slate-200 inline-block"></span> Unanswered</span>
+            <span class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded bg-amber-500 inline-block"></span> Flagged</span>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- POST-TEST REPORT CONTAINER (Hidden Initially) -->
+  <section id="resultsContainer" class="hidden max-w-5xl mx-auto w-full px-4 sm:px-6 py-8 space-y-6">
+    <!-- Results Header -->
+    <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white rounded-3xl p-6 sm:p-8 shadow-xl border border-indigo-900 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-emerald-400 bg-emerald-950/80 px-3 py-1 rounded-full border border-emerald-800">
+          Accommodated Test Complete
+        </span>
+        <h2 class="text-2xl sm:text-3xl font-extrabold mt-3">
+          Score: <span id="finalScore" class="text-amber-400">--</span> / 25
+        </h2>
+        <p class="text-sm text-slate-300 mt-1">
+          Estimated TOEFL ITP Listening Section Scaled Score: <span id="scaledScore" class="font-bold text-white">--</span> / 68
+        </p>
+      </div>
+      <button onclick="restartTest()" class="bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-sm px-6 py-3 rounded-xl transition shadow">
+        Retake Examination
+      </button>
+    </div>
+
+    <!-- DETAILED REVIEW ACCORDION / LIST -->
+    <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
+      <h3 class="text-lg font-bold text-slate-900 mb-1">Diagnostic Answer Key & Explanations</h3>
+      <p class="text-xs text-slate-500 mb-6">Review your choices against the verified answers and transcript explanations.</p>
+      <div id="reviewList" class="space-y-5">
+        <!-- Review items injected here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="mt-auto border-t border-slate-200 bg-white py-3 px-4 text-center text-xs text-slate-500">
+    Accessible TOEFL ITP® Mock Platform &bull; Specifically designed for students with hearing disabilities &bull; Full Spoken Transcript Mode
+  </footer>
+
+  <!-- DATA & LOGIC SCRIPT -->
+  <script>
+    // --- 25 QUESTIONS DIRECTLY MATCHED TO THE PROVIDED OFFICIAL TRANSCRIPT ---
+    const QUESTIONS_DATA = [
+      // Q1 to Q20: Part A Short Dialogues
+      {
+        id: 1,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "I think we should submit the essay now, we won't have another time since we have public policy and comparative politics today." },
+          { speaker: "Woman", text: "Yeah, we've got a lot on our plate today." }
+        ],
+        question: "What does the woman imply?",
+        options: [
+          "A) They have plenty of free time left this afternoon.",
+          "B) They are extremely busy with multiple commitments today.",
+          "C) They should skip their comparative politics class.",
+          "D) They have already eaten lunch together."
+        ],
+        correct: 1,
+        explanation: "The idiom 'have a lot on our plate' means having a very large amount of work or commitments to deal with."
+      },
+      {
+        id: 2,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Woman", text: "You really can't throw well. I don't think you can be on the team unless you improve." },
+          { speaker: "Man", text: "I'm afraid I'm very bad at playing sports." }
+        ],
+        question: "What does the man imply?",
+        options: [
+          "A) He expects to become captain soon.",
+          "B) He agrees that his athletic skills are weak.",
+          "C) He refuses to practice throwing.",
+          "D) He plays better than the woman."
+        ],
+        correct: 1,
+        explanation: "The man admits 'I'm afraid I'm very bad at playing sports,' agreeing with her assessment of his poor athletic skills."
+      },
+      {
+        id: 3,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "Did you see the manager about the job in the bookstore?" },
+          { speaker: "Woman", text: "Yes, and I also had to fill out an application for further interviews." }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) She was rejected on the spot.",
+          "B) She bought books from the manager.",
+          "C) She completed an application to continue the hiring process.",
+          "D) The bookstore position has already been filled."
+        ],
+        correct: 2,
+        explanation: "She met the manager and submitted an application form required for subsequent interview rounds."
+      },
+      {
+        id: 4,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Woman", text: "Were you able to get into that calculus class?" },
+          { speaker: "Man", text: "Yeah, much to my regret." }
+        ],
+        question: "What does the man mean?",
+        options: [
+          "A) He was unable to enroll in calculus.",
+          "B) He enrolled in the class but wishes he had not.",
+          "C) He loves the calculus syllabus.",
+          "D) He dropped out of the class yesterday."
+        ],
+        correct: 1,
+        explanation: "'Much to my regret' indicates he was admitted into the course, but is now unhappy or regretful about that decision."
+      },
+      {
+        id: 5,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "Were you able to afford this month's rent?" },
+          { speaker: "Woman", text: "I did, and I have barely enough money to go through this week." }
+        ],
+        question: "What does the woman imply?",
+        options: [
+          "A) She has plenty of savings remaining.",
+          "B) Her rent payment left her with almost no money.",
+          "C) She forgot to pay the landlord this month.",
+          "D) She will move to a more expensive apartment."
+        ],
+        correct: 1,
+        explanation: "'Barely enough money to go through this week' means her budget is practically exhausted after paying rent."
+      },
+      {
+        id: 6,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Woman", text: "I don't think we can finish this project today. Too many layers we haven't painted yet, and we are running out of the blue color too." },
+          { speaker: "Man", text: "I think we need a hand for this." }
+        ],
+        question: "What does the man mean?",
+        options: [
+          "A) They should wash their hands before painting.",
+          "B) They should abandon the project entirely.",
+          "C) They require additional help or assistance.",
+          "D) They need more paintbrushes."
+        ],
+        correct: 2,
+        explanation: "The idiom 'need a hand' means needing help or assistance from other people."
+      },
+      {
+        id: 7,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "We are expected to choose, but I think both candidates for supervisor are underqualified." },
+          { speaker: "Woman", text: "Me too." }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) She wants to apply for supervisor herself.",
+          "B) She agrees that neither candidate has suitable qualifications.",
+          "C) She has already cast her vote.",
+          "D) She thinks both candidates are exceptional."
+        ],
+        correct: 1,
+        explanation: "The woman responds 'Me too', concurring completely with the man's viewpoint that both candidates lack qualification."
+      },
+      {
+        id: 8,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Woman", text: "Do we have any more shampoo?" },
+          { speaker: "Man", text: "We are run out of it, someone has to go to the store." }
+        ],
+        question: "What does the man mean?",
+        options: [
+          "A) There is plenty of shampoo in the cabinet.",
+          "B) The store is currently closed.",
+          "C) They have exhausted their supply and need to buy more.",
+          "D) He already bought two bottles."
+        ],
+        correct: 2,
+        explanation: "'Run out of it' means the shampoo supply is empty and must be replenished at the store."
+      },
+      {
+        id: 9,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "Emily got her ticket to a concert in Vegas, and she has been looking like that all day." },
+          { speaker: "Woman", text: "She couldn't be happier." }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) Emily is extremely delighted.",
+          "B) Emily regrets buying the concert ticket.",
+          "C) Emily lost her ticket in Vegas.",
+          "D) Emily wishes she had stayed home."
+        ],
+        correct: 0,
+        explanation: "'She couldn't be happier' is an expression expressing maximum happiness and satisfaction."
+      },
+      {
+        id: 10,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Woman", text: "Thank you for helping me move in, Chris." },
+          { speaker: "Man", text: "Well, we're neighbors now. Help me with dinner sometimes, and we're even." }
+        ],
+        question: "Where does this conversation probably take place?",
+        options: [
+          "A) Inside a restaurant kitchen.",
+          "B) At an apartment complex or residential home.",
+          "C) At a grocery supermarket.",
+          "D) In a car dealership."
+        ],
+        correct: 1,
+        explanation: "The woman thanks Chris for helping her 'move in' and he notes 'we're neighbors now', placing the context at a residential home or apartment."
+      },
+      {
+        id: 11,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "Were you pleased with last week's convention in Sydney?" },
+          { speaker: "Woman", text: "Nothing went as planned." }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) The convention was completely successful.",
+          "B) The convention went poorly and encountered problems.",
+          "C) She postponed her trip to Sydney.",
+          "D) She forgot to attend the convention."
+        ],
+        correct: 1,
+        explanation: "Stating 'Nothing went as planned' implies the trip and event did not go smoothly and was unsatisfactory."
+      },
+      {
+        id: 12,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "Why does it feel like she didn't want to participate in this project, but changed her mind because I was in?" },
+          { speaker: "Woman", text: "Oh Joe, took you long enough." }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) She believes Joe arrived late to class.",
+          "B) Joe took a very long time to realize something obvious.",
+          "C) The project was canceled weeks ago.",
+          "D) She doesn't like Joe working on the project."
+        ],
+        correct: 1,
+        explanation: "'Took you long enough' indicates the man was slow to recognize an obvious truth about the girl's motivation."
+      },
+      {
+        id: 13,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Woman", text: "Sorry, I can't come with you, I'm feeling under the weather today." },
+          { speaker: "Man", text: "No problem. Do you have your medicine, or do you want me to grab some on my way home?" }
+        ],
+        question: "What does the man mean?",
+        options: [
+          "A) He refuses to assist the woman.",
+          "B) He offers to purchase medication for her if needed.",
+          "C) He is also feeling ill.",
+          "D) He insists that she come along anyway."
+        ],
+        correct: 1,
+        explanation: "The man asks if she wants him to 'grab some on my way home', offering to buy and bring her medicine."
+      },
+      {
+        id: 14,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "Did you see Emily's name on the list of scholarship grantees?" },
+          { speaker: "Woman", text: "As expected from her, she had prepared herself for it." }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) She is surprised Emily won the scholarship.",
+          "B) Emily did not work hard enough.",
+          "C) Emily's achievement is not surprising because she prepared thoroughly.",
+          "D) The scholarship was canceled."
+        ],
+        correct: 2,
+        explanation: "'As expected from her' indicates Emily's award was anticipated due to her diligent preparation."
+      },
+      {
+        id: 15,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "Do you know anything about the final exam in chemistry tomorrow?" },
+          { speaker: "Woman", text: "It's going to be rather difficult, isn't it?" }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) The chemistry exam will be easy.",
+          "B) She anticipates the test will be challenging.",
+          "C) The chemistry exam was postponed.",
+          "D) She knows all the answers already."
+        ],
+        correct: 1,
+        explanation: "She states the exam is 'going to be rather difficult', predicting a tough testing experience."
+      },
+      {
+        id: 16,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Woman", text: "Mr. Perapio, it appears these books are one week late." },
+          { speaker: "Man", text: "Yeah, my bad. I forgot they were due to return last Friday." }
+        ],
+        question: "Who is the woman?",
+        options: [
+          "A) A bookstore customer",
+          "B) A librarian or library staff member",
+          "C) A taxi driver",
+          "D) An author"
+        ],
+        correct: 1,
+        explanation: "Noticing that borrowed books are 'one week late' and due for return points directly to a librarian."
+      },
+      {
+        id: 17,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "I got a dozen of large eggs and five pounds of potatoes for only $3 in Fresh Market." },
+          { speaker: "Woman", text: "I don't know how that store makes money." }
+        ],
+        question: "What does the woman imply?",
+        options: [
+          "A) The store's prices are surprisingly low.",
+          "B) The potatoes were spoiled.",
+          "C) The store is going out of business tomorrow.",
+          "D) She works at Fresh Market."
+        ],
+        correct: 0,
+        explanation: "Wondering how the store makes money implies that $3 for all those groceries is extraordinarily cheap."
+      },
+      {
+        id: 18,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Woman", text: "Jimmy, you need to pick up the ingredients at the fresh store today. Martin is on his day off." },
+          { speaker: "Man", text: "There goes my plan of grabbing some coffee in the morning." }
+        ],
+        question: "What will the man probably do?",
+        options: [
+          "A) Spend the morning relaxing at a cafe.",
+          "B) Go pick up the ingredients instead of having morning coffee.",
+          "C) Take the day off like Martin.",
+          "D) Ask Martin to come to work."
+        ],
+        correct: 1,
+        explanation: "'There goes my plan' shows he has to forgo his morning coffee trip in order to pick up the supplies."
+      },
+      {
+        id: 19,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "How was your trip to the Seven Magic Mountains?" },
+          { speaker: "Woman", text: "The place is a work of art." }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) She found the location remarkably beautiful and impressive.",
+          "B) She was disappointed by the mountains.",
+          "C) The place was closed for artistic restoration.",
+          "D) She forgot her camera."
+        ],
+        correct: 0,
+        explanation: "Calling a site 'a work of art' is a strong compliment admiring its visual beauty and artistic appeal."
+      },
+      {
+        id: 20,
+        part: "Part A",
+        category: "Short Dialogue",
+        dialogue: [
+          { speaker: "Man", text: "I'd like to give you something you need the most right now, and I thought this is the one." },
+          { speaker: "Woman", text: "Oh, you have no idea what it means to me." }
+        ],
+        question: "What does the woman mean?",
+        options: [
+          "A) She doesn't understand the purpose of the gift.",
+          "B) She is deeply grateful and touched by the gift.",
+          "C) She wants to return the item.",
+          "D) She wanted something different."
+        ],
+        correct: 1,
+        explanation: "'You have no idea what it means to me' expresses profound appreciation and emotional gratitude."
+      },
+
+      // Q21 to Q24: Part B Longer Academic Conversation (Student & Professor)
+      {
+        id: 21,
+        part: "Part B",
+        category: "Longer Conversation (Part B)",
+        dialogue: [
+          { speaker: "Student (Emily)", text: "Hi Professor, did you get a minute?" },
+          { speaker: "Professor", text: "Sure, Emily, did you pick up your paper yet? I just finished grading them and I was impressed with yours. It has incredible real world applications. I can tell you put a lot of thought into this paper." },
+          { speaker: "Student (Emily)", text: "Oh, thank you, Professor. And since we are talking about real-world applications, that is sort of what I want to talk to you about. It's about the student exchange program." },
+          { speaker: "Professor", text: "That's a great program. Are you thinking about going somewhere?" },
+          { speaker: "Student (Emily)", text: "Well, I have a couple of places in mind, but I have my heart set on Guatemala." }
+        ],
+        question: "Why does the student go to see the professor?",
+        options: [
+          "A) To complain about her grade on the essay.",
+          "B) To discuss participating in the student exchange program to Guatemala.",
+          "C) To ask for an extension on her homework.",
+          "D) To apply for a job as a teaching assistant."
+        ],
+        correct: 1,
+        explanation: "Emily explicitly says she came to talk about the student exchange program and her interest in going to Guatemala."
+      },
+      {
+        id: 22,
+        part: "Part B",
+        category: "Longer Conversation (Part B)",
+        dialogue: [
+          { speaker: "Professor", text: "What draws you to Guatemala?" },
+          { speaker: "Student (Emily)", text: "I think Guatemala would be the most relevant place for me. It would be perfect to go there so I can do some research about my ideas... Guatemala has the exact type of agricultural practices, economy, and environmental conditions I want to study and explore." }
+        ],
+        question: "Why does the student specifically want to go to Guatemala?",
+        options: [
+          "A) To learn Spanish from native speakers.",
+          "B) Because of its agricultural practices, economy, and environmental conditions relevant to her research.",
+          "C) She has family living there.",
+          "D) It is the cheapest exchange destination."
+        ],
+        correct: 1,
+        explanation: "She emphasizes that Guatemala has the exact agricultural, economic, and environmental conditions needed for her research."
+      },
+      {
+        id: 23,
+        part: "Part B",
+        category: "Longer Conversation (Part B)",
+        dialogue: [
+          { speaker: "Professor", text: "The exchange program to Guatemala is only for Spanish majors, and the Spanish department is usually strict about that." },
+          { speaker: "Student (Emily)", text: "That doesn't seem fair... I mean, I know some Spanish if that's any consolation." },
+          { speaker: "Professor", text: "I'll talk to the person in charge of the situation and see if they can find a way to accommodate you." }
+        ],
+        question: "What makes it possible that the student may not be allowed to go to Guatemala?",
+        options: [
+          "A) Her grades are too low.",
+          "B) The program is restricted exclusively to Spanish majors.",
+          "C) Guatemala canceled the program this semester.",
+          "D) The application fee has increased."
+        ],
+        correct: 1,
+        explanation: "The professor reveals that the Guatemala exchange is strictly reserved for students majoring in Spanish."
+      },
+      {
+        id: 24,
+        part: "Part B",
+        category: "Longer Conversation (Part B)",
+        dialogue: [
+          { speaker: "Professor", text: "I think you should prepare some arguments for the Spanish department, just in case. Can you do that?" },
+          { speaker: "Student (Emily)", text: "Of course, I'll be ready for that. Thank you again, Professor." }
+        ],
+        question: "What will the student most likely do after the conversation?",
+        options: [
+          "A) Change her major immediately.",
+          "B) Drop out of university.",
+          "C) Prepare arguments justifying why she should be admitted to the Guatemala program.",
+          "D) Book her flight ticket directly."
+        ],
+        correct: 2,
+        explanation: "The professor asks her to prepare persuasive arguments for the Spanish department, and she confirms she will get ready for that."
+      },
+
+      // Q25: Part C Academic Talk (History of Flight / Hot Air Balloons)
+      {
+        id: 25,
+        part: "Part C",
+        category: "Academic Lecture",
+        dialogue: [
+          { speaker: "Lecturer (Man)", text: "Many people know a certain movie with lots of balloons that can lift a house, but how many of you know that balloon was indeed the beginning of human trip through the air? Yes, you heard it right. Long before the gigantic machine we called the airplane, two brothers demonstrated their invention: the hot air balloon, before a crowd of dignitaries in Annonay, France, in 1783." }
+        ],
+        question: "What is the speaker's main purpose in this introductory talk?",
+        options: [
+          "A) To review an animated cinema movie.",
+          "B) To discuss the historical origins of human flight beginning with the hot air balloon.",
+          "C) To explain how jet engines operate.",
+          "D) To criticize early French inventors."
+        ],
+        correct: 1,
+        explanation: "The lecturer introduces how the hot air balloon marked the true historical beginning of human flight in 1783 France."
+      }
+    ];
+
+    // --- CONVERSION TABLE (Estimated Scaled Scores 31 - 68 for 25 Items) ---
+    const SCALED_SCORES = [
+      31, 32, 33, 35, 37, 39, 41, 43, 45, 47,
+      49, 51, 53, 54, 56, 58, 60, 62, 63, 65,
+      66, 67, 67, 68, 68, 68
+    ];
+
+    // State Variables
+    let currentIdx = 0;
+    const userAnswers = new Array(QUESTIONS_DATA.length).fill(null);
+    const flaggedQuestions = new Array(QUESTIONS_DATA.length).fill(false);
+    let timeRemaining = 35 * 60; // 35 minutes in seconds
+    let timerInterval = null;
+
+    // Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      buildPalette();
+      renderQuestion(0);
+      startTimer();
+    });
+
+    // Timer logic
+    function startTimer() {
+      const display = document.getElementById('timerDisplay');
+      timerInterval = setInterval(() => {
+        if (timeRemaining <= 0) {
+          clearInterval(timerInterval);
+          submitTest();
+          return;
+        }
+        timeRemaining--;
+        const m = Math.floor(timeRemaining / 60);
+        const s = timeRemaining % 60;
+        display.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+
+        if (timeRemaining <= 300) {
+          document.getElementById('timerContainer').classList.add('text-rose-400', 'border-rose-600', 'animate-pulse');
+        }
+      }, 1000);
+    }
+
+    // Build 25 Question Navigator
+    function buildPalette() {
+      const grid = document.getElementById('paletteGrid');
+      grid.innerHTML = '';
+      QUESTIONS_DATA.forEach((_, idx) => {
+        const btn = document.createElement('button');
+        btn.id = `palette-btn-${idx}`;
+        btn.className = `h-9 rounded-lg text-xs font-bold relative transition flex items-center justify-center border border-slate-200 bg-slate-100 text-slate-700 hover:bg-slate-200`;
+        btn.textContent = idx + 1;
+        btn.onclick = () => renderQuestion(idx);
+        grid.appendChild(btn);
+      });
+      updatePaletteUI();
+    }
+
+    function updatePaletteUI() {
+      QUESTIONS_DATA.forEach((_, idx) => {
+        const btn = document.getElementById(`palette-btn-${idx}`);
+        if (!btn) return;
+
+        btn.className = 'h-9 rounded-lg text-xs font-bold relative transition flex items-center justify-center border ';
+
+        if (idx === currentIdx) {
+          btn.className += 'ring-2 ring-indigo-600 border-indigo-600 ';
+        } else {
+          btn.className += 'border-slate-200 ';
+        }
+
+        if (userAnswers[idx] !== null) {
+          btn.className += 'bg-indigo-600 text-white ';
+        } else {
+          btn.className += 'bg-slate-100 text-slate-700 hover:bg-slate-200 ';
+        }
+
+        // Flag Indicator Dot
+        const existingDot = btn.querySelector('.flag-dot');
+        if (existingDot) existingDot.remove();
+
+        if (flaggedQuestions[idx]) {
+          const dot = document.createElement('span');
+          dot.className = 'flag-dot absolute -top-1 -right-1 w-2.5 h-2.5 bg-amber-500 rounded-full border border-white';
+          btn.appendChild(dot);
+        }
+      });
+
+      // Progress count
+      const answeredCount = userAnswers.filter(a => a !== null).length;
+      document.getElementById('progressSummary').textContent = `${answeredCount}/${QUESTIONS_DATA.length} Answered`;
+    }
+
+    // Render Question & Transcript
+    function renderQuestion(index) {
+      currentIdx = index;
+      const q = QUESTIONS_DATA[index];
+
+      // Badges
+      document.getElementById('partBadge').textContent = q.part;
+      document.getElementById('questionCategory').textContent = q.category;
+      document.getElementById('qNumberBadge').textContent = `Question ${q.id} of 25`;
+
+      // Render Script Transcript with distinct speaker badges
+      const scriptBox = document.getElementById('scriptContainer');
+      scriptBox.innerHTML = '';
+
+      q.dialogue.forEach(line => {
+        const row = document.createElement('div');
+        row.className = 'p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3';
+
+        let badgeClass = 'bg-slate-200 text-slate-800';
+        if (line.speaker.includes('Man')) badgeClass = 'bg-indigo-100 text-indigo-900 border border-indigo-200';
+        else if (line.speaker.includes('Woman') || line.speaker.includes('Emily')) badgeClass = 'bg-emerald-100 text-emerald-900 border border-emerald-200';
+        else if (line.speaker.includes('Professor') || line.speaker.includes('Lecturer')) badgeClass = 'bg-amber-100 text-amber-900 border border-amber-300';
+
+        row.innerHTML = `
+          <span class="text-[11px] font-bold px-2 py-0.5 rounded uppercase shrink-0 ${badgeClass}">
+            ${line.speaker}
+          </span>
+          <p class="text-sm leading-relaxed text-slate-800">${line.text}</p>
+        `;
+        scriptBox.appendChild(row);
+      });
+
+      // Render Question Prompt
+      document.getElementById('questionPrompt').textContent = q.question;
+
+      // Render Options
+      const optionsBox = document.getElementById('optionsList');
+      optionsBox.innerHTML = '';
+      q.options.forEach((optText, optIdx) => {
+        const isSelected = userAnswers[index] === optIdx;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = `w-full text-left p-3.5 rounded-xl border text-sm font-medium transition flex items-start gap-3 ${
+          isSelected
+            ? 'bg-indigo-50 border-indigo-600 text-indigo-950 ring-1 ring-indigo-500 shadow-sm'
+            : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
+        }`;
+
+        btn.onclick = () => selectOption(optIdx);
+        btn.innerHTML = `
+          <span class="w-5 h-5 rounded-full border text-xs flex items-center justify-center shrink-0 mt-0.5 ${
+            isSelected ? 'bg-indigo-600 text-white border-indigo-600 font-bold' : 'border-slate-300 text-slate-500'
+          }">
+            ${String.fromCharCode(65 + optIdx)}
+          </span>
+          <span class="leading-relaxed flex-1">${optText.replace(/^[A-D]\)\s*/, '')}</span>
+        `;
+        optionsBox.appendChild(btn);
+      });
+
+      // Update Flag Button appearance
+      const flagBtn = document.getElementById('flagBtn');
+      const flagText = document.getElementById('flagText');
+      if (flaggedQuestions[index]) {
+        flagBtn.className = 'text-xs font-semibold px-2.5 py-1 rounded-md border border-amber-300 bg-amber-50 text-amber-700 flex items-center gap-1.5 transition';
+        flagText.textContent = 'Flagged';
+      } else {
+        flagBtn.className = 'text-xs font-semibold px-2.5 py-1 rounded-md border border-slate-200 text-slate-500 hover:text-amber-600 hover:border-amber-300 flex items-center gap-1.5 transition';
+        flagText.textContent = 'Flag for Review';
+      }
+
+      // Prev / Next Buttons states
+      document.getElementById('prevBtn').disabled = (index === 0);
+      document.getElementById('prevBtn').classList.toggle('opacity-40', index === 0);
+      document.getElementById('nextBtn').textContent = (index === QUESTIONS_DATA.length - 1) ? 'Finish & Review' : 'Next Question';
+
+      updatePaletteUI();
+    }
+
+    function selectOption(optionIndex) {
+      userAnswers[currentIdx] = optionIndex;
+      renderQuestion(currentIdx);
+    }
+
+    function toggleFlag() {
+      flaggedQuestions[currentIdx] = !flaggedQuestions[currentIdx];
+      renderQuestion(currentIdx);
+    }
+
+    function goToPreviousQuestion() {
+      if (currentIdx > 0) renderQuestion(currentIdx - 1);
+    }
+
+    function goToNextQuestion() {
+      if (currentIdx < QUESTIONS_DATA.length - 1) {
+        renderQuestion(currentIdx + 1);
+      } else {
+        submitTest();
+      }
+    }
+
+    // Submit and show results
+    function submitTest() {
+      clearInterval(timerInterval);
+
+      let score = 0;
+      QUESTIONS_DATA.forEach((q, idx) => {
+        if (userAnswers[idx] === q.correct) score++;
+      });
+
+      document.getElementById('testContainer').classList.add('hidden');
+      document.getElementById('resultsContainer').classList.remove('hidden');
+
+      document.getElementById('finalScore').textContent = score;
+      document.getElementById('scaledScore').textContent = SCALED_SCORES[score] || 31;
+
+      // Populate review breakdown
+      const reviewBox = document.getElementById('reviewList');
+      reviewBox.innerHTML = '';
+
+      QUESTIONS_DATA.forEach((q, idx) => {
+        const userChoice = userAnswers[idx];
+        const isCorrect = userChoice === q.correct;
+
+        const card = document.createElement('div');
+        card.className = `p-4 sm:p-5 rounded-xl border ${
+          isCorrect ? 'bg-emerald-50/50 border-emerald-200' : 'bg-rose-50/50 border-rose-200'
+        }`;
+
+        let scriptSnippet = q.dialogue.map(d => `<strong>${d.speaker}:</strong> "${d.text}"`).join('<br>');
+
+        card.innerHTML = `
+          <div class="flex items-center justify-between gap-3 mb-2">
+            <span class="text-xs font-bold px-2 py-0.5 rounded bg-slate-200 text-slate-800">
+              Question #${q.id} (${q.part})
+            </span>
+            <span class="text-xs font-bold px-2.5 py-0.5 rounded-full ${
+              isCorrect ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'
+            }">
+              ${isCorrect ? 'Correct' : userChoice !== null ? 'Incorrect' : 'Unanswered'}
+            </span>
+          </div>
+
+          <div class="text-xs bg-white p-3 rounded-lg border border-slate-200 text-slate-600 mb-3 font-sans">
+            ${scriptSnippet}
+          </div>
+
+          <p class="text-sm font-semibold text-slate-900 mb-2">${q.question}</p>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs mb-3">
+            ${q.options.map((opt, oIdx) => {
+              const isKey = oIdx === q.correct;
+              const isSelected = oIdx === userChoice;
+              let style = 'bg-white border-slate-200 text-slate-600';
+              if (isKey) style = 'bg-emerald-100 border-emerald-400 text-emerald-950 font-bold';
+              else if (isSelected && !isKey) style = 'bg-rose-100 border-rose-400 text-rose-950 font-bold';
+
+              return `
+                <div class="p-2 rounded-lg border ${style}">
+                  ${opt}
+                  ${isKey ? ' <span class="text-emerald-700">(Correct Answer)</span>' : ''}
+                  ${isSelected && !isKey ? ' <span class="text-rose-700">(Your Answer)</span>' : ''}
+                </div>
+              `;
+            }).join('')}
+          </div>
+
+          <div class="text-xs bg-indigo-50 border-l-2 border-indigo-600 p-2.5 rounded-r text-indigo-950">
+            <strong>Explanation:</strong> ${q.explanation}
+          </div>
+        `;
+
+        reviewBox.appendChild(card);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function restartTest() {
+      userAnswers.fill(null);
+      flaggedQuestions.fill(false);
+      timeRemaining = 35 * 60;
+
+      document.getElementById('resultsContainer').classList.add('hidden');
+      document.getElementById('testContainer').classList.remove('hidden');
+
+      renderQuestion(0);
+      startTimer();
+    }
+  </script>
+</body>
+</html>
